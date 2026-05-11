@@ -211,8 +211,7 @@
        This will take less than 2 minutes.</p>
   </div>
 
-  <form id="feedbackForm" method="POST" action="https://formspree.io/f/xykolzql">
-    <input type="hidden" name="_subject" value="After-Sales Feedback Response" />
+  <form id="feedbackForm" onsubmit="submitForm(event)">
     <div class="form-body">
 
       <!-- Q1 -->
@@ -221,11 +220,11 @@
         <div class="rating-group">
           <span class="scale-label left">Poor</span>
           <div class="rating-options" id="q1">
-            <label><input type="radio" name="Appeals process (1-5)" value="1" required /><span>1</span></label>
-            <label><input type="radio" name="Appeals process (1-5)" value="2" /><span>2</span></label>
-            <label><input type="radio" name="Appeals process (1-5)" value="3" /><span>3</span></label>
-            <label><input type="radio" name="Appeals process (1-5)" value="4" /><span>4</span></label>
-            <label><input type="radio" name="Appeals process (1-5)" value="5" /><span>5</span></label>
+            <label><input type="radio" name="q1" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="q1" value="2" /><span>2</span></label>
+            <label><input type="radio" name="q1" value="3" /><span>3</span></label>
+            <label><input type="radio" name="q1" value="4" /><span>4</span></label>
+            <label><input type="radio" name="q1" value="5" /><span>5</span></label>
           </div>
           <span class="scale-label right">Excellent</span>
         </div>
@@ -235,8 +234,8 @@
       <div class="question">
         <label class="q-label">2. Were you satisfied with the outcome?<span class="req">*</span></label>
         <div class="yn-group">
-          <label><input type="radio" name="Satisfied with outcome" value="Yes" required /> Yes</label>
-          <label><input type="radio" name="Satisfied with outcome" value="No" /> No</label>
+          <label><input type="radio" name="q2" value="Yes" required /> Yes</label>
+          <label><input type="radio" name="q2" value="No" /> No</label>
         </div>
       </div>
 
@@ -246,11 +245,11 @@
         <div class="rating-group">
           <span class="scale-label left">Poor</span>
           <div class="rating-options">
-            <label><input type="radio" name="Team interaction (1-5)" value="1" required /><span>1</span></label>
-            <label><input type="radio" name="Team interaction (1-5)" value="2" /><span>2</span></label>
-            <label><input type="radio" name="Team interaction (1-5)" value="3" /><span>3</span></label>
-            <label><input type="radio" name="Team interaction (1-5)" value="4" /><span>4</span></label>
-            <label><input type="radio" name="Team interaction (1-5)" value="5" /><span>5</span></label>
+            <label><input type="radio" name="q3" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="q3" value="2" /><span>2</span></label>
+            <label><input type="radio" name="q3" value="3" /><span>3</span></label>
+            <label><input type="radio" name="q3" value="4" /><span>4</span></label>
+            <label><input type="radio" name="q3" value="5" /><span>5</span></label>
           </div>
           <span class="scale-label right">Excellent</span>
         </div>
@@ -262,11 +261,11 @@
         <div class="rating-group">
           <span class="scale-label left">Very slow</span>
           <div class="rating-options">
-            <label><input type="radio" name="Speed of handling (1-5)" value="1" required /><span>1</span></label>
-            <label><input type="radio" name="Speed of handling (1-5)" value="2" /><span>2</span></label>
-            <label><input type="radio" name="Speed of handling (1-5)" value="3" /><span>3</span></label>
-            <label><input type="radio" name="Speed of handling (1-5)" value="4" /><span>4</span></label>
-            <label><input type="radio" name="Speed of handling (1-5)" value="5" /><span>5</span></label>
+            <label><input type="radio" name="q4" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="q4" value="2" /><span>2</span></label>
+            <label><input type="radio" name="q4" value="3" /><span>3</span></label>
+            <label><input type="radio" name="q4" value="4" /><span>4</span></label>
+            <label><input type="radio" name="q4" value="5" /><span>5</span></label>
           </div>
           <span class="scale-label right">Very fast</span>
         </div>
@@ -278,11 +277,11 @@
         <div class="rating-group">
           <span class="scale-label left">Very difficult</span>
           <div class="rating-options">
-            <label><input type="radio" name="Ease of sharing info (1-5)" value="1" required /><span>1</span></label>
-            <label><input type="radio" name="Ease of sharing info (1-5)" value="2" /><span>2</span></label>
-            <label><input type="radio" name="Ease of sharing info (1-5)" value="3" /><span>3</span></label>
-            <label><input type="radio" name="Ease of sharing info (1-5)" value="4" /><span>4</span></label>
-            <label><input type="radio" name="Ease of sharing info (1-5)" value="5" /><span>5</span></label>
+            <label><input type="radio" name="q5" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="q5" value="2" /><span>2</span></label>
+            <label><input type="radio" name="q5" value="3" /><span>3</span></label>
+            <label><input type="radio" name="q5" value="4" /><span>4</span></label>
+            <label><input type="radio" name="q5" value="5" /><span>5</span></label>
           </div>
           <span class="scale-label right">Very easy</span>
         </div>
@@ -293,7 +292,7 @@
       <!-- Q6 -->
       <div class="question">
         <label class="q-label" for="q6">6. Any additional comments or suggestions?</label>
-        <textarea id="q6" name="Additional comments" placeholder="Please share anything else you'd like us to know…"></textarea>
+        <textarea id="q6" name="q6" placeholder="Please share anything else you'd like us to know…"></textarea>
       </div>
 
     </div><!-- /form-body -->
@@ -301,8 +300,46 @@
     <div class="submit-row">
       <button type="submit">Submit Feedback</button>
     </div>
-    <p class="footer-note">Your response is submitted securely. No account required.</p>
+    <p class="footer-note">Your response will be sent via email. No account required.</p>
   </form>
 </div>
+
+<script>
+  function submitForm(e) {
+    e.preventDefault();
+    const f = e.target;
+
+    const labels = {
+      q1: "Appeals process rating (1-5)",
+      q2: "Satisfied with outcome",
+      q3: "Team interaction rating (1-5)",
+      q4: "Speed of case handling (1-5)",
+      q5: "Ease of sharing information (1-5)",
+      q6: "Additional comments"
+    };
+
+    const getValue = name => {
+      const checked = [...f.querySelectorAll(`[name="${name}"]:checked`)];
+      if (checked.length) return checked[0].value;
+      const el = f.elements[name];
+      if (el && el.tagName === "TEXTAREA") return el.value.trim() || "—";
+      return "—";
+    };
+
+    const lines = Object.entries(labels)
+      .map(([key, lbl]) => `${lbl}: ${getValue(key)}`)
+      .join("\n");
+
+    const subject = encodeURIComponent("After-Sales Feedback Response");
+    const body = encodeURIComponent(
+      "After-Sales Feedback\n" +
+      "====================\n\n" +
+      lines + "\n\n" +
+      "Submitted: " + new Date().toLocaleString()
+    );
+
+    window.location.href = `mailto:samantha@seima.com.au?subject=${subject}&body=${body}`;
+  }
+</script>
 </body>
 </html>
