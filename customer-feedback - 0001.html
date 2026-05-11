@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>After-Sales Feedback</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      max-width: 620px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .header {
+      background: #1a3c5e;
+      color: #fff;
+      padding: 32px 36px 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 0.92rem;
+      opacity: 0.82;
+      line-height: 1.5;
+    }
+
+    .form-body {
+      padding: 32px 36px 28px;
+    }
+
+    .question {
+      margin-bottom: 28px;
+    }
+
+    .question label.q-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+
+    .question label.q-label span.req {
+      color: #c0392b;
+      margin-left: 2px;
+    }
+
+    /* Yes / No */
+    .yn-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .yn-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: #333;
+      background: #f7f8fa;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      padding: 8px 22px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .yn-group input[type="radio"] { accent-color: #1a3c5e; }
+
+    .yn-group label:has(input:checked) {
+      border-color: #1a3c5e;
+      background: #e8f0f8;
+    }
+
+    /* Star / numeric rating */
+    .rating-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .rating-group .scale-label {
+      font-size: 0.78rem;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    .rating-group .scale-label.left { margin-right: 4px; }
+    .rating-group .scale-label.right { margin-left: 4px; }
+
+    .rating-options {
+      display: flex;
+      gap: 6px;
+    }
+
+    .rating-options label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .rating-options label span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid #d1d5db;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #444;
+      background: #f7f8fa;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+
+    .rating-options input[type="radio"] { display: none; }
+
+    .rating-options label:has(input:checked) span {
+      background: #1a3c5e;
+      border-color: #1a3c5e;
+      color: #fff;
+    }
+
+    .rating-options label:hover span {
+      border-color: #1a3c5e;
+      background: #e8f0f8;
+    }
+
+    /* Free text */
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.93rem;
+      color: #333;
+      resize: vertical;
+      min-height: 110px;
+      transition: border-color 0.15s;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #1a3c5e;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 4px 0 28px;
+    }
+
+    .submit-row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 36px 32px;
+    }
+
+    button[type="submit"] {
+      background: #1a3c5e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button[type="submit"]:hover { background: #14304d; }
+
+    .footer-note {
+      font-size: 0.78rem;
+      color: #aaa;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <h1>After-Sales Feedback</h1>
+    <p>Thank you for your time. Your feedback helps us improve our service.
+       This will take less than 2 minutes.</p>
+  </div>
+
+  <form id="feedbackForm" method="POST" action="https://formspree.io/f/xykolzql">
+    <input type="hidden" name="_subject" value="After-Sales Feedback Response" />
+    <div class="form-body">
+
+      <!-- Q1 -->
+      <div class="question">
+        <label class="q-label">1. How was the appeals process overall?<span class="req">*</span></label>
+        <div class="rating-group">
+          <span class="scale-label left">Poor</span>
+          <div class="rating-options" id="q1">
+            <label><input type="radio" name="Appeals process (1-5)" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="Appeals process (1-5)" value="2" /><span>2</span></label>
+            <label><input type="radio" name="Appeals process (1-5)" value="3" /><span>3</span></label>
+            <label><input type="radio" name="Appeals process (1-5)" value="4" /><span>4</span></label>
+            <label><input type="radio" name="Appeals process (1-5)" value="5" /><span>5</span></label>
+          </div>
+          <span class="scale-label right">Excellent</span>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question">
+        <label class="q-label">2. Were you satisfied with the outcome?<span class="req">*</span></label>
+        <div class="yn-group">
+          <label><input type="radio" name="Satisfied with outcome" value="Yes" required /> Yes</label>
+          <label><input type="radio" name="Satisfied with outcome" value="No" /> No</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question">
+        <label class="q-label">3. How would you rate your interaction with our team?<span class="req">*</span></label>
+        <div class="rating-group">
+          <span class="scale-label left">Poor</span>
+          <div class="rating-options">
+            <label><input type="radio" name="Team interaction (1-5)" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="Team interaction (1-5)" value="2" /><span>2</span></label>
+            <label><input type="radio" name="Team interaction (1-5)" value="3" /><span>3</span></label>
+            <label><input type="radio" name="Team interaction (1-5)" value="4" /><span>4</span></label>
+            <label><input type="radio" name="Team interaction (1-5)" value="5" /><span>5</span></label>
+          </div>
+          <span class="scale-label right">Excellent</span>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question">
+        <label class="q-label">4. How quickly was your case handled?<span class="req">*</span></label>
+        <div class="rating-group">
+          <span class="scale-label left">Very slow</span>
+          <div class="rating-options">
+            <label><input type="radio" name="Speed of handling (1-5)" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="Speed of handling (1-5)" value="2" /><span>2</span></label>
+            <label><input type="radio" name="Speed of handling (1-5)" value="3" /><span>3</span></label>
+            <label><input type="radio" name="Speed of handling (1-5)" value="4" /><span>4</span></label>
+            <label><input type="radio" name="Speed of handling (1-5)" value="5" /><span>5</span></label>
+          </div>
+          <span class="scale-label right">Very fast</span>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question">
+        <label class="q-label">5. How easy was it to share information with us?<span class="req">*</span></label>
+        <div class="rating-group">
+          <span class="scale-label left">Very difficult</span>
+          <div class="rating-options">
+            <label><input type="radio" name="Ease of sharing info (1-5)" value="1" required /><span>1</span></label>
+            <label><input type="radio" name="Ease of sharing info (1-5)" value="2" /><span>2</span></label>
+            <label><input type="radio" name="Ease of sharing info (1-5)" value="3" /><span>3</span></label>
+            <label><input type="radio" name="Ease of sharing info (1-5)" value="4" /><span>4</span></label>
+            <label><input type="radio" name="Ease of sharing info (1-5)" value="5" /><span>5</span></label>
+          </div>
+          <span class="scale-label right">Very easy</span>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Q6 -->
+      <div class="question">
+        <label class="q-label" for="q6">6. Any additional comments or suggestions?</label>
+        <textarea id="q6" name="Additional comments" placeholder="Please share anything else you'd like us to know…"></textarea>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <div class="submit-row">
+      <button type="submit">Submit Feedback</button>
+    </div>
+    <p class="footer-note">Your response is submitted securely. No account required.</p>
+  </form>
+</div>
+</body>
+</html>
